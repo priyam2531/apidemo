@@ -55,4 +55,35 @@ class StudentController extends GetxController{
     }
   }
 
+
+  updateStudent({id, name, email, phoneNumber, address}) async {
+    try{
+      final response = await dio.put("${BASE_URI}/edit-student/$id",data: {
+        "email":email,
+        "name":name,
+        "phone":phoneNumber,
+        "address":address
+      });
+
+      if(response.statusCode == 200){
+        getStudentData();
+        update();
+      }
+    }catch(e){
+      print("Error updating student:- $e");
+    }
+  }
+
+  deleteStudent(id) async {
+    try{
+      final response = await dio.delete("${BASE_URI}/remove-student/$id");
+
+      if(response.statusCode == 200){
+        getStudentData();
+        update();
+      }
+    }catch(e){
+      print("Error deleting student:- $e");
+    }
+  }
 }

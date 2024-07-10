@@ -84,9 +84,25 @@ class StudentsView extends StatelessWidget {
           itemBuilder: (context, index) {
             return Card(
               child: ListTile(
-                  leading: CircleAvatar(),
-                  title: Text(studentController.student[index].name.toString()),
-                  subtitle: Text(studentController.student[index].email.toString())),
+                leading: IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    studentController.updateStudent(
+                        id: studentController.student[index].sId,
+                        name: studentController.name.text,
+                        email: studentController.email.text,
+                        phoneNumber: studentController.phone.text,
+                        address: studentController.address.text);
+                  },
+                ),
+                title: Text(studentController.student[index].name.toString()),
+                subtitle: Text(studentController.student[index].email.toString()),
+                trailing: IconButton(
+                    onPressed: () {
+                      studentController.deleteStudent(studentController.student[index].sId);
+                    },
+                    icon: Icon(Icons.delete)),
+              ),
             );
           },
         ),
