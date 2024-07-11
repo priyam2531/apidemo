@@ -86,13 +86,73 @@ class StudentsView extends StatelessWidget {
               child: ListTile(
                 leading: IconButton(
                   icon: Icon(Icons.edit),
-                  onPressed: () {
-                    studentController.updateStudent(
-                        id: studentController.student[index].sId,
-                        name: studentController.name.text,
-                        email: studentController.email.text,
-                        phoneNumber: studentController.phone.text,
-                        address: studentController.address.text);
+                  onPressed: () { showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              const Text("Update Student"),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: studentController.name,
+                                decoration: InputDecoration(border: OutlineInputBorder()),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: studentController.email,
+                                decoration: InputDecoration(border: OutlineInputBorder()),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: studentController.phone,
+                                decoration: InputDecoration(border: OutlineInputBorder()),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: studentController.address,
+                                decoration: InputDecoration(border: OutlineInputBorder()),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              MaterialButton(
+                                onPressed: () {
+                                  studentController.updateStudent(
+                                    id: studentController.student[index].sId,
+                                    name: studentController.name.text,
+                                    email: studentController.email.text,
+                                    phoneNumber: studentController.phone.text,
+                                    address: studentController.address.text,
+                                  );
+                                  Get.back();
+                                },
+                                color: Colors.amber,
+                                child: const Text("UPDATE"),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                    // studentController.updateStudent(
+                    //     id: studentController.student[index].sId,
+                    //     name: studentController.name.text,
+                    //     email: studentController.email.text,
+                    //     phoneNumber: studentController.phone.text,
+                    //     address: studentController.address.text);
                   },
                 ),
                 title: Text(studentController.student[index].name.toString()),
